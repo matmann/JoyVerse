@@ -1,4 +1,4 @@
-#JoyVerse actions,patch=4.10.3,date=2026-11-23
+#JoyVerse actions,patch=4.10.3,date=2026-11-24
 In-game heading,In-game name,Button / Axis,Description,Game ID,Actionmap,Colour category,Short map name,Other names,Status,Keyboard
 Vehicles - Seats and Operator Modes,Look behind,Button,Swings your view to look behind you while held.,v_view_look_behind,seat_general,CAMERA/VIEW,,,,comma
 Vehicles - Seats and Operator Modes,Toggle Mining Operator Mode,Button,"Switches Mining operator mode on, or back to the previous mode.",v_toggle_mining_mode,seat_general,MINING,,,,
@@ -592,9 +592,9 @@ E.V.A. - Zero-G Traversal,Detach from Surface,Button,Lets go of the surface you'
 E.V.A. - Zero-G Traversal,Roll Left,Button,Rolls you left while attached to a surface in zero-g.,zgt_roll_left,zero_gravity_traversal,,,,,q
 E.V.A. - Zero-G Traversal,Roll Right,Button,Rolls you right while attached to a surface in zero-g.,zgt_roll_right,zero_gravity_traversal,,,,,e
 Ground Vehicle - General,Horn,Button,Sounds the vehicle's horn.,v_horn,vehicle_general,GAME UI/INTERACT,,,,space
-Ground Vehicle - Movement,Brake,Button,Brakes the ground vehicle.,v_brake,vehicle_driver,FLIGHT/EVA,,,,x
-Ground Vehicle - Movement,Drive Forward / Backward,Axis,Axis: drives a ground vehicle forward and back.,v_move,vehicle_driver,FLIGHT/EVA,,,,
-Ground Vehicle - Movement,Boost,Button,Ground vehicle boost.,v_boost,vehicle_driver,FLIGHT/EVA,,Boost (Ground Vehicle),heading inferred,lshift
+Ground Vehicle - Movement,Brake,Button,Brakes the ground vehicle.,v_brake,vehicle_driver,GROUND VEHICLES,,,,x
+Ground Vehicle - Movement,Drive Forward / Backward,Axis,Axis: drives a ground vehicle forward and back.,v_move,vehicle_driver,GROUND VEHICLES,,,,
+Ground Vehicle - Movement,Boost,Button,Ground vehicle boost.,v_boost,vehicle_driver,GROUND VEHICLES,,Boost (Ground Vehicle),heading inferred,lshift
 Ground Vehicle - Movement,Drive Forward,,,,,,,,no Game ID yet,
 Ground Vehicle - Movement,Drive Backward,,,,,,,,no Game ID yet,
 Ground Vehicle - Movement,Turn Left,,,,,,,,no Game ID yet,
@@ -604,9 +604,9 @@ Ground Vehicle - Movement,Ground Vehicles - Pitch Down,,,,,,,,no Game ID yet,
 Ground Vehicle - Movement,Turn Right,,,,,,,,no Game ID yet,
 Ground Vehicle - Movement,Pitch Up / Down (Axis / HOTAS),,,,,,,,no Game ID yet,
 Ground Vehicle - Movement,Toggle Auto Braking On Idle,,,,,,,,no Game ID yet,
-Ground Vehicle - Movement,Drive Forward,Button,Drives a ground vehicle forward.,v_move_forward,vehicle_driver,,,,,w
-Ground Vehicle - Movement,Drive Backward,Button,Drives a ground vehicle backward.,v_move_back,vehicle_driver,,,,,s
-Ground Vehicle - Movement,Toggle Auto Braking On Idle,Button,Turns on or off the ground vehicle braking by itself when you let go of the throttle.,v_mgv_switch_brake_on_idle,vehicle_driver,,,,,c
+Ground Vehicle - Movement,Drive Forward,Button,Drives a ground vehicle forward.,v_move_forward,vehicle_driver,GROUND VEHICLES,,,,w
+Ground Vehicle - Movement,Drive Backward,Button,Drives a ground vehicle backward.,v_move_back,vehicle_driver,GROUND VEHICLES,,,,s
+Ground Vehicle - Movement,Toggle Auto Braking On Idle,Button,Turns on or off the ground vehicle braking by itself when you let go of the throttle.,v_mgv_switch_brake_on_idle,vehicle_driver,GROUND VEHICLES,,,,c
 Electronic Access - Spectator,Spectator Camera Target (Next),Button,Spectator camera: watch the next player.,spectate_next_target,spectator,CAMERA/VIEW,,,,
 Electronic Access - Spectator,Spectator Camera Target (Previous),Button,Spectator camera: watch the previous player.,spectate_prev_target,spectator,CAMERA/VIEW,,,,
 Electronic Access - Spectator,Spectator Camera Zoom In,Button,Spectator camera: zooms in.,spectate_zoom_in,spectator,CAMERA/VIEW,,,,
