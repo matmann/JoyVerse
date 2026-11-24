@@ -1,0 +1,20 @@
+JoyVerse
+Copyright (c) 2026 matmann. All rights reserved.
+
+Free for personal use.
+
+You may download, run and use JoyVerse for free, and share the maps you
+make with it. You may not copy, modify, redistribute, sell or publish the
+software, or any part of its code or the author's own artwork, without the
+author's written permission.
+
+Third-party material
+--------------------
+Product photos, names and logos of VIRPIL Controls and VKB, and the Star
+Citizen name and logo, belong to their owners and are not covered by this
+licence. They are used here for identification only. JoyVerse is a fan
+project, not affiliated with or endorsed by Cloud Imperium Games, VIRPIL or
+VKB. Star Citizen is a trademark of Cloud Imperium Rights LLC.
+
+The software is provided "as is", without warranty of any kind. The author
+is not liable for any claim, damages or other liability arising from its use.

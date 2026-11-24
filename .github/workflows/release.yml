@@ -1,0 +1,57 @@
+# Publish a release for testers: edit release/release.json (version, stage, title) and push.
+# Builds JoyVerse-v<version>-<stage>.zip from JoyVerse-offline.html, LICENSE.txt and release/Read me first.txt,
+# tags it v<version>-<stage> and attaches the zip to a GitHub release (marked pre-release for alpha / beta).
+name: Release
+on:
+  push:
+    branches: [main]
+    paths: ['release/release.json']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      # a release whose tag isn't in main's history (left over from before the history was cleaned) is removed, tag and all
+      - name: Remove stale releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git fetch --tags --force
+          for t in $(git tag); do
+            if ! git merge-base --is-ancestor "$t" origin/main 2>/dev/null; then
+              echo "removing $t"; gh release delete "$t" --cleanup-tag -y || git push origin ":refs/tags/$t" || true
+            fi
+          done
+      - name: Build the zip
+        id: build
+        run: |
+          python3 - <<'PY'
+          import json, os, zipfile
+          r = json.load(open('release/release.json'))
+          v, st = r['version'], r.get('stage', '').strip()
+          tag = f"v{v}-{st}" if st else f"v{v}"
+          name = f"JoyVerse v{v} {st}".strip()
+          sub = lambda t: t.replace('{VERSION}', v).replace('{STAGE_UPPER}', st.upper()).replace('{STAGE}', st)
+          crlf = lambda t: t.replace('\r\n', '\n').replace('\n', '\r\n').encode('utf-8')
+          zname = f"JoyVerse-{tag}.zip"
+          with zipfile.ZipFile(zname, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:
+              z.write('JoyVerse-offline.html', f"{name}/{name}.html")
+              z.writestr(f"{name}/Read me first.txt", crlf(sub(open('release/Read me first.txt', encoding='utf-8').read())))
+              z.writestr(f"{name}/LICENSE.txt", crlf(open('LICENSE.txt', encoding='utf-8').read()))
+          open('notes.md', 'w', encoding='utf-8').write(sub(open('release/notes.md', encoding='utf-8').read()))
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as o:
+              o.write(f"tag={tag}\nzip={zname}\ntitle={r.get('title', name)}\npre={'true' if st else 'false'}\n")
+          PY
+      - name: Publish the release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.build.outputs.tag }}
+          name: ${{ steps.build.outputs.title }}
+          body_path: notes.md
+          prerelease: ${{ steps.build.outputs.pre }}
+          files: ${{ steps.build.outputs.zip }}

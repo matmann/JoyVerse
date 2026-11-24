@@ -1,0 +1,75 @@
+JOYVERSE – v{VERSION} {STAGE_UPPER} (release 1 for testers)
+================================================
+
+A control map maker for Star Citizen: it reads your Star Citizen controls
+export and draws every binding on pictures of your sticks and panels, ready
+to print or save as a picture.
+
+This is an ALPHA: things will be rough in places. Please tell me what breaks
+or confuses you.
+
+
+GETTING STARTED
+---------------
+1. Unzip this folder anywhere (Desktop is fine).
+2. Open "JoyVerse v{VERSION} {STAGE}.html" in Brave, Chrome or Edge.
+   It runs offline in your browser – nothing is installed or sent anywhere.
+   When you're online it also picks up new and updated devices.
+   (Or skip the download: https://matmann.github.io/JoyVerse/ )
+3. The "Getting started" walkthrough opens by itself. Have these ready:
+   - Your Star Citizen controls export (the main one). In game:
+     Options > Keybindings > Control Profiles > Save Control Settings.
+     It's saved in:
+     ...\StarCitizen\LIVE\user\client\0\controls\mappings\
+   - Optional: your Joystick Gremlin / Gobloon profile (if you use vJoy),
+     or your VIRPIL VPC Configurator profiles (for shifted buttons).
+4. Follow the steps: it recognises your devices, places your bindings,
+   and asks about your modifier / shift button.
+
+
+SAVE YOUR WORK
+--------------
+Your map is kept in this browser automatically. To keep a copy or move it
+to another PC, use  Map file > Save map file  (and Open map file to bring
+it back). Export page as PNG makes a picture for printing or a second screen.
+
+
+DEVICES IN THIS RELEASE
+-----------------------
+VIRPIL: Constellation Alpha (left / right), Control Panel #1, #2, #3
+VKB:    Gladiator NXT EVO (left / right), Gladiator NXT EVO Omni Throttle (left / right)
+
+
+THINGS WORTH TRYING
+-------------------
+- Getting started with your own controls export.
+- Moving things on the map: drag an icon, a heading or a label; click an
+  icon for its group's "Move group" tab and line dots. Ctrl+Z undoes.
+- Game check (top bar): compares the map with your game file.
+- View mode, then click a colour in the legend to show only those actions.
+- Colours: the scheme menu in the top bar, or "Edit colours..." to make your own.
+- Find (top bar): press a button on your joystick and the map jumps to it.
+
+
+KNOWN LIMITS
+------------
+- Browsers can only see buttons 1–32 of a joystick (for Find and the
+  joystick button in the label editor).
+- With vJoy, every device is called "vJoy Device" in the game file, so the
+  walkthrough guesses which is which – check the "Your devices" step.
+- Only the devices listed above have pictures so far.
+
+
+REPORTING A PROBLEM
+-------------------
+Send me:
+1. A screenshot of what looks wrong.
+2. Your map file (Map file > Save map file).
+3. Your Star Citizen controls export, if it's about bindings.
+The version number is at the top left (v{VERSION} {STAGE_UPPER}).
+
+
+LICENCE: All rights reserved – free for personal use. See LICENSE.txt.
+
+Not affiliated with Cloud Imperium Games, VIRPIL or VKB.
+Star Citizen is a trademark of Cloud Imperium Rights LLC.

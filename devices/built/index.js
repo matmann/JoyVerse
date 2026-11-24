@@ -1,0 +1,101 @@
+window.VPCM_DEVICE_INDEX=[
+ {
+  "id": "vpc-alpha-l",
+  "name": "VPC Constellation Alpha (L)",
+  "maker": "VIRPIL",
+  "model": "VPC Constellation Alpha",
+  "short": "Left stick",
+  "head": "ALPHA (L)",
+  "side": "L",
+  "saved": "2026-11-23",
+  "v": "5cdea9168a81"
+ },
+ {
+  "id": "vpc-alpha-r",
+  "name": "VPC Constellation Alpha (R)",
+  "maker": "VIRPIL",
+  "model": "VPC Constellation Alpha",
+  "short": "Right stick",
+  "head": "ALPHA (R)",
+  "side": "R",
+  "saved": "2026-11-23",
+  "v": "0ac439826258"
+ },
+ {
+  "id": "vpc-control-panel-1",
+  "name": "VPC Control Panel #1",
+  "maker": "VIRPIL",
+  "model": "VPC Control Panel #1",
+  "short": "Panel #1",
+  "head": "Panel #1",
+  "side": "",
+  "saved": "2026-11-23",
+  "v": "f237d174cb8b"
+ },
+ {
+  "id": "vpc-control-panel-2",
+  "name": "VPC Control Panel #2",
+  "maker": "VIRPIL",
+  "model": "VPC Control Panel #2",
+  "short": "Panel #2",
+  "head": "Panel #2",
+  "side": "",
+  "saved": "2026-11-23",
+  "v": "47a606814c86"
+ },
+ {
+  "id": "vpc-control-panel-3",
+  "name": "VPC Control Panel #3",
+  "maker": "VIRPIL",
+  "model": "VPC Control Panel #3",
+  "short": "Panel #3",
+  "head": "Panel #3",
+  "side": "",
+  "saved": "2026-11-23",
+  "v": "d6b0f9eef645"
+ },
+ {
+  "id": "vkb-gladiator-nxt-evo-l",
+  "name": "VKB Gladiator NXT EVO (L)",
+  "maker": "VKB",
+  "model": "Gladiator NXT EVO (SCG)",
+  "short": "Left stick",
+  "head": "Gladiator NXT EVO (L)",
+  "side": "L",
+  "saved": "2026-11-23",
+  "v": "56c9f62d48db"
+ },
+ {
+  "id": "vkb-gladiator-nxt-evo-r",
+  "name": "VKB Gladiator NXT EVO (R)",
+  "maker": "VKB",
+  "model": "Gladiator NXT EVO (SCG)",
+  "short": "Right stick",
+  "head": "Right",
+  "side": "R",
+  "saved": "2026-11-23",
+  "v": "f16bf19f74d5"
+ },
+ {
+  "id": "vkb-gladiator-nxt-evo-omni-l",
+  "name": "VKB Gladiator NXT EVO OMNI (L)",
+  "maker": "VKB",
+  "model": "Gladiator NXT EVO OMNI",
+  "short": "Left stick",
+  "head": "Left",
+  "side": "L",
+  "saved": "2026-11-23",
+  "v": "ebc9a35387f9"
+ },
+ {
+  "id": "vkb-gladiator-nxt-evo-omni-r",
+  "name": "VKB Gladiator NXT EVO OMNI (R)",
+  "maker": "VKB",
+  "model": "Gladiator NXT EVO OMNI",
+  "short": "Right stick",
+  "head": "Right",
+  "side": "R",
+  "saved": "2026-11-23",
+  "v": "32a5331b92f3"
+ }
+];
