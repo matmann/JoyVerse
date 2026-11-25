@@ -95,7 +95,7 @@
   {
    "id": "c2",
    "type": "lever",
-   "name": "SLIDER R",
+   "name": "SLIDER R (axis)",
    "opts": {},
    "outs": {
     "axis": {
@@ -138,8 +138,7 @@
       "2": 500
      }
     }
-   ],
-   "group": "g1"
+   ]
   },
   {
    "id": "c3",
@@ -886,7 +885,7 @@
   {
    "id": "c12",
    "type": "ministick",
-   "name": "ANALOG STICK R",
+   "name": "ANALOG STICK R (axis)",
    "opts": {
     "push": true
    },
@@ -1027,7 +1026,7 @@
   {
    "id": "c15",
    "type": "hat4",
-   "name": "ANALOG STICK R",
+   "name": "ANALOG STICK R (buttons)",
    "opts": {
     "push": true
    },
@@ -1101,7 +1100,7 @@
   {
    "id": "c16",
    "type": "button",
-   "name": "BUTTON",
+   "name": "SLIDER R (button)",
    "opts": {},
    "outs": {
     "press": {
@@ -1111,23 +1110,44 @@
      "just": 0
     }
    },
-   "heads": [],
-   "leaders": [],
-   "group": "g1"
+   "heads": [
+    {
+     "t": "SLIDER R",
+     "x": 3984,
+     "y": 5137,
+     "size": 67,
+     "anchor": "end"
+    }
+   ],
+   "leaders": [
+    {
+     "pts": [
+      [
+       4016,
+       5154
+      ],
+      [
+       3306,
+       5153
+      ],
+      [
+       3066,
+       4996
+      ],
+      [
+       2936,
+       4738
+      ]
+     ],
+     "rr": {
+      "2": 500
+     }
+    }
+   ]
   }
  ],
  "saved": "2026-11-25",
- "groups": [
-  {
-   "id": "g1",
-   "type": "group",
-   "name": "SLIDER R",
-   "opts": {},
-   "outs": {},
-   "heads": [],
-   "leaders": []
-  }
- ],
+ "groups": [],
  "arts": [
   {
    "src": "vpc-alpha-r-top.webp",

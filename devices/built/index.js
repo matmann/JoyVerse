@@ -8,7 +8,7 @@ window.VPCM_DEVICE_INDEX=[
   "head": "ALPHA (L)",
   "side": "L",
   "saved": "2026-11-25",
-  "v": "f2683a3d24c2"
+  "v": "f8612b817db7"
  },
  {
   "id": "vpc-alpha-r",
@@ -19,7 +19,7 @@ window.VPCM_DEVICE_INDEX=[
   "head": "ALPHA (R)",
   "side": "R",
   "saved": "2026-11-25",
-  "v": "d37b9df06c75"
+  "v": "3e9666495a69"
  },
  {
   "id": "vpc-control-panel-1",
