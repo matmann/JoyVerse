@@ -7,8 +7,8 @@ window.VPCM_DEVICE_INDEX=[
   "short": "Left stick",
   "head": "ALPHA (L)",
   "side": "L",
-  "saved": "2026-11-23",
-  "v": "5cdea9168a81"
+  "saved": "2026-11-25",
+  "v": "f2683a3d24c2"
  },
  {
   "id": "vpc-alpha-r",
@@ -18,8 +18,8 @@ window.VPCM_DEVICE_INDEX=[
   "short": "Right stick",
   "head": "ALPHA (R)",
   "side": "R",
-  "saved": "2026-11-23",
-  "v": "0ac439826258"
+  "saved": "2026-11-25",
+  "v": "45e10d9ecf4f"
  },
  {
   "id": "vpc-control-panel-1",
