@@ -19,7 +19,7 @@ window.VPCM_DEVICE_INDEX=[
   "head": "ALPHA (R)",
   "side": "R",
   "saved": "2026-11-25",
-  "v": "3e9666495a69"
+  "v": "5f16b53b2da4"
  },
  {
   "id": "vpc-control-panel-1",
