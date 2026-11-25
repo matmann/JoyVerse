@@ -41,7 +41,7 @@ window.VPCM_DEVICE_INDEX=[
   "head": "Panel #2",
   "side": "",
   "saved": "2026-11-25",
-  "v": "02b49bdb3b1f"
+  "v": "5f0f670e4a9f"
  },
  {
   "id": "vpc-control-panel-3",
