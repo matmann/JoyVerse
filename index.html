@@ -175,7 +175,7 @@ body.shpick #map{cursor:crosshair}body.shpick .slot.shpt{outline:none}body.shpic
 </head>
 <body>
 <header>
-  <h1 title="JoyVerse v0.9.62 alpha – built 26 Nov 0036"><b>Joy</b>Verse <small class="bstamp" style="font-size:11px;font-weight:500;color:var(--dim);letter-spacing:0">v0.9.62 <span class="stage">alpha</span></small></h1>
+  <h1 title="JoyVerse v0.9.63 alpha – built 26 Nov 0116"><b>Joy</b>Verse <small class="bstamp" style="font-size:11px;font-weight:500;color:var(--dim);letter-spacing:0">v0.9.63 <span class="stage">alpha</span></small></h1>
   <div class="tabs" id="pagetabs"></div><button id="padd2" class="ico" title="Add a page">+</button>
   <span class="chip bad" id="dups" hidden></span><span class="chip warn" id="issues" hidden></span><button class="chip warn" id="offctl" hidden></button><span class="chip good" id="allok" hidden>✓ All good</span><button class="chip warn" id="rebuildchip" hidden title="You changed how the game file reads (modifier, shift step, VIRPIL profile or device). Rebuild the map from your game file to bring it in.">↻ Rebuild map</button>
   <span class="sp"></span>
@@ -407,8 +407,8 @@ try{if(!data.layout3){for(const pg of ['sticks','panels'])for(const s of data[pg
 let ACTCAT={};
 function buildActions(){applyActionEdits();
   // keys are upper case (labels show in capitals on the map); DISP keeps the in-game spelling for the list
-  ACTCAT={};const DISP={},GN=new Set(),GX=new Set(),AXK=new Set(),KID={};
-  for(const [id,v] of Object.entries(SCN)){const k=v[0].toUpperCase();ACTCAT[k]=v[1];DISP[k]=v[0];GN.add(k);KID[k]=id;if(AXIS_IDS.has(id))AXK.add(k)}
+  ACTCAT={};const DISP={},GN=new Set(),GX=new Set(),AXK=new Set(),KID={},KIDS={};
+  for(const [id,v] of Object.entries(SCN)){const k=v[0].toUpperCase();ACTCAT[k]=v[1];DISP[k]=v[0];GN.add(k);KID[k]=id;(KIDS[k]=KIDS[k]||[]).push(id);if(AXIS_IDS.has(id))AXK.add(k)}
   for(const n of GAME_EXTRA){const k=n.toUpperCase();if(!DISP[k]){DISP[k]=n;GX.add(k)}}
   for(const pg of allPages())for(const s of data[pg])for(const l of s.lines)if(l.act){const k=l.act.toUpperCase();ACTCAT[k]=l.cat;if(!DISP[k])DISP[k]=l.act}
   const rank=k=>GN.has(k)?0:GX.has(k)?1:2;
@@ -417,7 +417,9 @@ function buildActions(){applyActionEdits();
   // axis controls get axis actions only; buttons get everything except axis actions
   ACT_ITEMS=keys.map(k=>({v:DISP[k],k,ax:AXK.has(k),hold:!!(KID[k]&&HOLDV.has(KID[k])),
     meta:(GN.has(k)?(AXK.has(k)?'axis action':'game action'):GX.has(k)?'not in your game file yet':'not a game action')+(CATS[ACTCAT[k]]?' · '+CATS[ACTCAT[k]][0]:''),
-    d:KID[k]?descFor(KID[k]):'',game:GN.has(k),kb:KID[k]?niceKey(kbOf(KID[k])):''}));
+    d:KID[k]?descFor(KID[k]):'',game:GN.has(k),kb:KID[k]?niceKey(kbOf(KID[k])):''})).flatMap(it=>{const ids=KIDS[it.k]||[];if(ids.length<2)return [it];
+    return ids.map(id=>({...it,id,ax:AXIS_IDS.has(id),hold:HOLDV.has(id),d:descFor(id),kb:niceKey(kbOf(id)),
+      meta:(AXIS_IDS.has(id)?'axis action':'game action')+(ACT_HEAD[id]?' · '+ACT_HEAD[id]:CATS[SCN[id][1]]?' · '+CATS[SCN[id][1]][0]:'')}))});
   $('#acts').innerHTML=keys.filter(k=>!AXK.has(k)).map(opt).join('');
   $('#acts_ax').innerHTML=keys.filter(k=>AXK.has(k)||(!GN.has(k)&&/\((ABS|REL)\.?\)|AXIS/.test(k))).map(opt).join('');
 }
@@ -868,7 +870,8 @@ function alsoNote(s,l,i){const a=(l.act||'').trim();if(!a)return '';const id=res
 function mapNameBox(l,i){if(!(l.act||'').trim())return '';const id=actIdOf(l),mine=id&&myNames()[id];
   return `<div class="mapname"><span>Name on map</span><input data-i="${i}" data-k="short" value="${esc(l.short||autoShort(l))}" placeholder="${esc(autoShort(l))}" title="Change it to use your own name on the map – empty goes back to the automatic one">
   <button data-keepname="${i}" ${l.short&&id?'':'hidden'} title="Use this name for this action on every label – in this map and your future maps (kept in this browser)">★ Keep</button>${mine&&!l.short?`<span class="myn" title="Your saved name – change it here, or in Actions → Your names">★ yours</span>`:''}</div>`}
-function descNote(s,l){const d=actDesc(s,l.act,l.mod);return `<div class="adesc">${esc(d)}</div>`}
+function lineDesc(s,l){const id=[].concat(l.gid||[]).find(x=>gameName(x)===l.act);return id?descFor(id):actDesc(s,l.act,l.mod)}
+function descNote(s,l){const d=lineDesc(s,l);return `<div class="adesc">${esc(d)}</div>`}
 function noGameBox(s,l,i){const a=(l.act||'').trim();if(!a)return '';const ng=isNoGame(l);
   if(!ng&&resolveFor(a,isAxis(s),null,/\[H\]/i.test(l.mod||'')).ids.length)return '';
   return `<div class="also"><label title="For things like the VPC modifier (shift) button – it isn't flagged, checked or exported"><input type="checkbox" data-nogame="${i}"${ng?' checked':''}> Device function, not a game action</label></div>`}
@@ -2209,7 +2212,7 @@ function renderAPick(){const inp=apFor;if(!inp)return;const p=$('#apick');const 
   p.style.left=Math.max(8,Math.min(r.right,innerWidth-8)-w)+'px';p.style.top=(r.bottom+4)+'px';p.hidden=false;
   const pr=p.getBoundingClientRect();if(pr.bottom>innerHeight-8){const up=r.top-pr.height-4;p.style.top=(up>=8?up:Math.max(8,innerHeight-pr.height-8))+'px'}}
 function closeAPick(){$('#apick').hidden=true;apFor=null}
-function apChoose(i){const p=$('#apick'),it=p._items&&p._items[i];if(!it||!apFor)return;const inp=apFor;inp.value=it.v;
+function apChoose(i){const p=$('#apick'),it=p._items&&p._items[i];if(!it||!apFor)return;const inp=apFor;inp.value=it.v;inp._gid=it.id||null;
   inp.dispatchEvent(new Event('input',{bubbles:true}));inp.dispatchEvent(new Event('change',{bubbles:true}));closeAPick()}
 $('#apick').addEventListener('mousedown',e=>e.preventDefault());
 $('#apick').addEventListener('click',e=>{const b=e.target.closest('.ar');if(b)apChoose(+b.dataset.i)});
@@ -2489,7 +2492,7 @@ function renderSide(){markPanelTabs();
   if(!s){side.innerHTML=`<h2>Edit assignments</h2><button id="tourbtn" style="margin:4px 0 10px">▶ Getting-started walkthrough</button><div class="empty">Click any label on the map to change what that button does. Changes save automatically in this browser.<br><br>
   Your edits save automatically on this PC, in this browser. To keep a copy or move it to another PC or browser, use <b>Map file → Save map file</b> here and <b>Open map file</b> there. <b>Map file → Save map file</b> keeps a copy as a .json file; <b>Map file → Export page as PNG</b> gives you a full-size sheet to print or put next to your rig.<br><br>
   <b>Game check</b> compares your map with a keybinding export from Star Citizen.<br><br>Click a colour or mode in the legend at the bottom of the map to show only those actions (click more to add them, <b>Show all</b> to clear). Click the legend’s heading (or <b>Legend</b>) to rename categories, change colours or add new ones.<br><br>Tick <b>Show free slots</b> to outline button numbers that have nothing bound yet. <b>+ Label</b> lets you place an extra label anywhere.<br><br>
-  <b>Moving things:</b> drag an icon to move that control with its labels, a heading or label to move just that (a push line stays where it is – drag its dots), <kbd>Alt</kbd>+drag an icon for just the icon. Click an icon to show its group’s red <b>Move group</b> tab and line dots. <kbd>Alt</kbd>+drag a picture to move just that picture of a device with its controls. <kbd>Ctrl</kbd>+<kbd>Z</kbd> undoes.<br><br>Button numbers are checked per device. If two controls on the same stick or panel share a number, they turn red, and the ⚠ button at the top steps through each one.<br><br><b>View mode</b> (or press <kbd>V</kbd>) hides everything except the map. Pick <b>Left</b>, <b>Right</b>, <b>Panel #2</b> or <b>Panel #1</b> in its floating bar to show just that device (keys <kbd>1</kbd>–<kbd>6</kbd>, or ← → to step through), <kbd>Esc</kbd> to come back. Its <b>Find action</b> box (<kbd>Ctrl</kbd>+<kbd>F</kbd>) and the legend filter work there too.<br><br>Shortcuts: <kbd>Esc</kbd> close · <kbd>Ctrl</kbd>+scroll to zoom</div><div class="hint" style="margin-top:14px;border-top:1px solid var(--line);padding-top:8px">JoyVerse v0.9.62 alpha · © 2026 matmann · All rights reserved – free for personal use.<br>A fan project, not affiliated with Cloud Imperium Games, VIRPIL or VKB. Star Citizen is a trademark of Cloud Imperium Rights LLC; device names, pictures and logos belong to their owners.</div>`;return}
+  <b>Moving things:</b> drag an icon to move that control with its labels, a heading or label to move just that (a push line stays where it is – drag its dots), <kbd>Alt</kbd>+drag an icon for just the icon. Click an icon to show its group’s red <b>Move group</b> tab and line dots. <kbd>Alt</kbd>+drag a picture to move just that picture of a device with its controls. <kbd>Ctrl</kbd>+<kbd>Z</kbd> undoes.<br><br>Button numbers are checked per device. If two controls on the same stick or panel share a number, they turn red, and the ⚠ button at the top steps through each one.<br><br><b>View mode</b> (or press <kbd>V</kbd>) hides everything except the map. Pick <b>Left</b>, <b>Right</b>, <b>Panel #2</b> or <b>Panel #1</b> in its floating bar to show just that device (keys <kbd>1</kbd>–<kbd>6</kbd>, or ← → to step through), <kbd>Esc</kbd> to come back. Its <b>Find action</b> box (<kbd>Ctrl</kbd>+<kbd>F</kbd>) and the legend filter work there too.<br><br>Shortcuts: <kbd>Esc</kbd> close · <kbd>Ctrl</kbd>+scroll to zoom</div><div class="hint" style="margin-top:14px;border-top:1px solid var(--line);padding-top:8px">JoyVerse v0.9.63 alpha · © 2026 matmann · All rights reserved – free for personal use.<br>A fan project, not affiliated with Cloud Imperium Games, VIRPIL or VKB. Star Citizen is a trademark of Cloud Imperium Rights LLC; device names, pictures and logos belong to their owners.</div>`;return}
   side.innerHTML=`<div class="phead"><h2>Button assignment</h2><button class="ico ptour" data-tour="label" title="Show me around this panel">?</button></div><input id="lname" class="lname" value="${esc(labelName(s))}" title="Click to rename this label"><div class="ldev"><span>Device</span><select id="ldev">${Object.entries(DEVNAME).map(([c,n])=>`<option value="${esc(c)}"${c===deviceOf(s)?' selected':''}>${esc(n)}</option>`).join('')}</select></div><input id="lsub" class="lsub" value="${esc(s.sub??(s.custom?'Custom label':cleanGroup(s.group)))}" title="Click to edit this sub-heading (only shown here)">${grpOf(s.id)&&(grpOf(s.id).g.mode!=='psd'||(grpOf(s.id).g.heads||[]).length)?`<label class="ldev"><span>Control name</span><input id="lgname" value="${esc(grpOf(s.id).g.mode==='psd'?grpOf(s.id).g.heads[0].t:grpOf(s.id).g.name)}" title="The heading printed on the sheet next to this control"></label>`:''}
   <div class="row lbl" id="lhdr"><span style="width:62px">${isAxis(s)?'Axis':'Button #'}</span><span style="width:74px">Modifier</span><span>Action</span></div>
   ${s.lines.map((l,i)=>`<div class="line">
@@ -2530,9 +2533,10 @@ function renderSide(){markPanelTabs();
   side.querySelectorAll('.dupmsg a[data-page]').forEach(a=>a.onclick=()=>goTo(a.dataset.page,a.dataset.id));
   side.querySelectorAll('input[data-k]').forEach(inp=>inp.addEventListener('input',()=>{
     const l=s.lines[inp.dataset.i];l[inp.dataset.k]=inp.value;
+    if(inp.dataset.k==='act'){if(inp._gid){if(!(l.gid&&l.gid[0]===inp._gid)){l.gid=[inp._gid];delete l.gsrc}}else if(l.gid&&!l.gid.some(id=>gameName(id)===inp.value)){delete l.gid;delete l.gsrc}inp._gid=null}
     if(inp.dataset.k==='short'&&(!inp.value.trim()||inp.value.trim().toUpperCase()===autoShort(l).toUpperCase()))l.short='';
     if(inp.dataset.k==='short'){const kb=inp.closest('.mapname').querySelector('[data-keepname]');if(kb)kb.hidden=!(l.short&&actIdOf(l))}
-    if(inp.dataset.k==='act'){{const dn=inp.closest('.line').querySelector('.adesc');if(dn)dn.textContent=actDesc(s,inp.value,l.mod);const sb=inp.closest('.line').querySelector('input[data-k=short]');if(sb){sb.placeholder=autoShort(l);if(!l.short)sb.value=autoShort(l)}}const c=ACTCAT[inp.value.toUpperCase()];if(c&&CATS[c]){l.cat=c;inp.closest('.line').querySelector('.cat').innerHTML=catChips(l,inp.dataset.i)}}
+    if(inp.dataset.k==='act'){{const dn=inp.closest('.line').querySelector('.adesc');if(dn)dn.textContent=lineDesc(s,l);const sb=inp.closest('.line').querySelector('input[data-k=short]');if(sb){sb.placeholder=autoShort(l);if(!l.short)sb.value=autoShort(l)}}const pid=[].concat(l.gid||[]).find(id=>gameName(id)===l.act);const c=pid?SCN[pid][1]:ACTCAT[inp.value.toUpperCase()];if(c&&CATS[c]){l.cat=c;inp.closest('.line').querySelector('.cat').innerHTML=catChips(l,inp.dataset.i)}}
     changed(s,false)}));
   side.querySelectorAll('.cat').forEach(c=>c.addEventListener('click',e=>{const sp=e.target.closest('span[data-cat]');if(!sp)return;s.lines[sp.dataset.i].cat=sp.dataset.cat;c.innerHTML=catChips(s.lines[sp.dataset.i],sp.dataset.i);changed(s,false)}));
   side.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{s.lines.splice(+b.dataset.del,1);if(!s.lines.length)s.lines.push({num:'',mod:'',act:'',label:'',cat:'ship',order:['num','mod','act'],indent:0,trail:0});changed(s)});
