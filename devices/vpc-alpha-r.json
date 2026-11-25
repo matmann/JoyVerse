@@ -138,7 +138,8 @@
       "2": 500
      }
     }
-   ]
+   ],
+   "group": "g1"
   },
   {
    "id": "c3",
@@ -641,7 +642,7 @@
      "just": 1
     },
     "right": {
-     "n": "145",
+     "n": "15",
      "x": 3461,
      "y": 498,
      "just": 0
@@ -1096,10 +1097,37 @@
     "s": 357,
     "rot": 0
    }
+  },
+  {
+   "id": "c16",
+   "type": "button",
+   "name": "BUTTON",
+   "opts": {},
+   "outs": {
+    "press": {
+     "n": "31",
+     "x": 3726,
+     "y": 5318,
+     "just": 0
+    }
+   },
+   "heads": [],
+   "leaders": [],
+   "group": "g1"
   }
  ],
  "saved": "2026-11-25",
- "groups": [],
+ "groups": [
+  {
+   "id": "g1",
+   "type": "group",
+   "name": "SLIDER R",
+   "opts": {},
+   "outs": {},
+   "heads": [],
+   "leaders": []
+  }
+ ],
  "arts": [
   {
    "src": "vpc-alpha-r-top.webp",
